@@ -1,0 +1,31 @@
+services:
+  draw:
+    build: .
+    restart: unless-stopped
+    stop_grace_period: 90s # 等待正在执行的保存与回收退出。
+    user: "${DRAW_UID:-1000}:${DRAW_GID:-1000}" # 必须能读写独立OAuth目录。
+    read_only: true
+    tmpfs: ["/tmp:size=16m,mode=1777"]
+    cap_drop: [ALL]
+    security_opt: [no-new-privileges:true]
+    pids_limit: 128
+    mem_limit: 768m # 图片仅在内存恢复，不写本地业务数据库。
+    ports: ["127.0.0.1:3000:3000"] # 公开访问应由HTTPS反向代理提供。
+    env_file: .env
+    environment:
+      FLOWUS_CONFIG_DIR: /var/lib/flowus
+      FLOWUS_CLI_PATH: /usr/local/bin/flowus
+      PASSWORD_HASH_FILE: /run/secrets/password-hash
+      SESSION_SECRET_FILE: /run/secrets/session-secret
+      THUMBNAIL_CACHE_DIR: /var/cache/draw
+      PORT: "3000"
+    volumes:
+      - ./oauth-state:/var/lib/flowus:rw # CLI刷新需要写入权限，禁止提交此目录。
+      - ./secrets:/run/secrets:ro
+      - ./bin/flowus:/usr/local/bin/flowus:ro # 自行下载匹配容器CPU架构的Linux官方CLI。
+      - draw-thumbnails:/var/cache/draw
+    logging:
+      driver: json-file
+      options: {max-size: "10m", max-file: "3"}
+volumes:
+  draw-thumbnails:

@@ -1,0 +1,10 @@
+*
+!package.json
+!package-lock.json
+!vite.config.js
+!client/
+!client/**
+!server/
+!server/**
+!ops/
+!ops/*.mjs

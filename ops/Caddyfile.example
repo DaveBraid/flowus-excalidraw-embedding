@@ -1,0 +1,9 @@
+# 替换为自己的域名；Caddy与应用运行在同一宿主机。
+draw.example.com {
+    request_body {
+        max_size 32MB
+    }
+    reverse_proxy 127.0.0.1:3000 {
+        header_up X-Real-IP {remote_host}
+    }
+}
