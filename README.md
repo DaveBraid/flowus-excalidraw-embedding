@@ -2,7 +2,23 @@
 
 将 Excalidraw 画布嵌入 FlowUs 页面。浏览器负责绘图，Node.js 服务负责认证和 FlowUs API 访问，画布 JSON、图片附件、设置及索引均持久保存在你自己的 FlowUs 工作区。
 
+![浅色模式下的 Excalidraw 画布编辑器，展示中文流程图](docs/screenshots/editor-light.png)
+
+*实际界面，使用完全虚构的演示数据；不连接真实 FlowUs 工作区。*
+
 适合个人或可信小组使用。一个实例使用一个共享访问密码、一个 OAuth 工作区和一个专用数据目录。支持固定链接、自动保存、图片附件、列表预览及画布恢复。
+
+## 界面预览
+
+画布列表：浏览真实场景预览，复制固定链接，再嵌入 FlowUs。以下均为演示数据。
+
+![画布列表中的三张演示画布与场景预览](docs/screenshots/library.png)
+
+深色模式：界面和编辑器跟随系统配色，示例内容保持一致。
+
+![同一中文流程图在深色模式下的实际界面](docs/screenshots/editor-dark.png)
+
+可选本机预览：先运行 `npm ci`、`npm run build`，再执行 `npm run demo`。打开终端提示的回环地址，使用固定演示密码 `demo-only-password` 登录。演示仅使用内存 API，不读取 `.env` 或 OAuth 状态，不访问真实 FlowUs；退出进程后演示更改丢失。此模式仅用于本机展示，不应用作生产服务。
 
 ## 架构与设计思路
 
@@ -153,4 +169,6 @@ npm test
 npm run build
 ```
 
-仓库不包含实际画布、测试截图、OAuth 状态、私有部署配置或供应商二进制。项目自身目前未附加开源许可证，公开可见不等于授予任意复用授权。Excalidraw、React、Vite、图标、字体及其他依赖仍受各自许可证约束；使用与再分发前请检查安装包内的许可证和 notices。
+仓库中的展示截图只使用虚构演示数据，不包含私人资料、真实业务画布、OAuth 状态、私有部署配置或供应商二进制。
+
+本项目以 [MIT 许可证](LICENSE)发布。Excalidraw、React、Vite、图标、字体及其他第三方依赖仍适用各自的许可证；使用与再分发时请同时保留其要求的许可证和 notices。
