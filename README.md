@@ -2,6 +2,8 @@
 
 将 Excalidraw 画布嵌入 FlowUs 页面。浏览器负责绘图，Node.js 服务负责认证和 FlowUs API 访问，画布 JSON、图片附件、设置及索引均持久保存在你自己的 FlowUs 工作区。
 
+部署后，通过 FlowUs 的“嵌入网页”功能将画布链接嵌入笔记，即可直接在笔记中获得下图所示的展示与编辑效果。
+
 ![浅色模式下的 Excalidraw 画布编辑器，展示中文流程图](docs/screenshots/editor-light.png)
 
 *实际界面，使用完全虚构的演示数据；不连接真实 FlowUs 工作区。*
